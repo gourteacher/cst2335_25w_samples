@@ -99,8 +99,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: ElevatedButton(onPressed: () {
-                Navigator.pushNamed(context, '/Third');
+              child: ElevatedButton(onPressed: () async {
+                var result = await Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return OtherPage();
+                  }),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Returned from second page: $result"),
+                  ),
+                );
+
               }, //Lambda, or anonymous function
                   child: Text('Go to third page')),
             ),
